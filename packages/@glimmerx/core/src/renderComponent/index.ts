@@ -21,6 +21,22 @@ import { RootReference } from '@glimmer/reference';
 export interface RenderComponentOptions {
   element: Element;
   services?: Dict<unknown>;
+  reRendered?: () => void;
+}
+
+type ResolveFn = () => void;
+type RejectFn = (error: Error) => void;
+
+let reRenderNotifiers: Array<[ResolveFn, RejectFn]> = [];
+
+export function didReRender() {
+  if (scheduled) {
+    return new Promise((resolve, reject) => {
+      reRenderNotifiers.push([resolve, reject]);
+    });
+  } else {
+    return Promise.resolve();
+  }
 }
 
 async function renderComponent(
@@ -58,7 +74,14 @@ function scheduleRevalidation() {
   scheduled = true;
   setTimeout(() => {
     scheduled = false;
-    revalidate();
+    try {
+      revalidate();
+      reRenderNotifiers.forEach(([resolve]) => resolve());
+    } catch (err) {
+      reRenderNotifiers.forEach(([,reject]) => reject(err));
+    }
+
+    reRenderNotifiers = [];
   }, 0);
 }
 
