@@ -1,8 +1,8 @@
-const { module, test } = QUnit;
+const { test } = QUnit;
 
 import { setComponentManager, getComponentManager } from '..';
 
-module('component managers', () => {
+QUnit.module('component managers', () => {
   test('setting and getting', assert => {
     const managerA = {} as any;
     const managerAAB = {} as any;

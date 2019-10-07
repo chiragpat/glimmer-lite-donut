@@ -8,10 +8,10 @@ import { helper } from '@glimmerx/helper';
 import { service } from '@glimmerx/service';
 import { on, action } from '@glimmerx/modifier';
 
-const { module, test } = QUnit;
+const { test } = QUnit;
 
 export default function renderTests(moduleName: string, render: (component: Constructor<Component>, options?: any) => Promise<string>) {
-  module(`${moduleName} rendering`, () => {
+ QUnit.module(`${moduleName} rendering`, () => {
     test('it renders a component', async assert => {
       class MyComponent extends Component {}
 

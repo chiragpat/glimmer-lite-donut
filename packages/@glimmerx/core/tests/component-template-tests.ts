@@ -1,8 +1,8 @@
-const { module, test } = QUnit;
+const { test } = QUnit;
 
 import { setComponentTemplate, getComponentTemplate } from '..';
 
-module('component templates', () => {
+QUnit.module('component templates', () => {
   test('setting and getting', assert => {
     const templateA = {} as any;
     const templateAAB = {} as any;

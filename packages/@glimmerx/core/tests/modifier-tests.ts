@@ -1,11 +1,11 @@
-const { module, test } = QUnit;
+const { test } = QUnit;
 
 import { on, action } from '@glimmerx/modifier';
 import Component, { tracked } from '@glimmerx/component';
 import { renderComponent, setComponentTemplate, didRender } from '..';
 import { compileTemplate } from './utils';
 
-module('Modifier Tests', () => {
+QUnit.module('Modifier Tests', () => {
   test('Supports the on modifier', async assert => {
     class MyComponent extends Component {
       @tracked count = 0;

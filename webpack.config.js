@@ -8,6 +8,7 @@ module.exports = {
     nodeTests: './packages/@glimmerx/ssr/tests/index.ts'
   },
   mode: 'development',
+  devtool: false,
   externals: {
     fs: 'fs'
   },
@@ -50,6 +51,7 @@ module.exports = {
   },
   resolve: {
     plugins: [new TsconfigPathsPlugin()],
+    mainFields: ['module', 'main'],
     extensions: ['.ts', '.js'],
   },
   output: {
